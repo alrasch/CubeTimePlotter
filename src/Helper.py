@@ -6,6 +6,17 @@ class Helper:
     def __init__(self):
         pass
 
+    def get_lifetime_best(self, times):
+        best = None
+        for time in times:
+            if best == None:
+                best = time
+            elif time < best:
+                best = time
+        if best != None:
+            return best
+        return False
+
     def get_avg(self, table):
         if len(table) == 0:
             return None
@@ -14,7 +25,7 @@ class Helper:
             try:
                 sum += value
             except Exception as e:
-                print e.__str__()
+                print "Error in getting average of table: " + e.__str__()
         avg = sum/len(table)
         return avg
 
@@ -29,7 +40,7 @@ class Helper:
 
         return avg
 
-    def lifetime_avg(self, times):
+    def get_lifetime_avg(self, times):
         if len(times) < 1:
             return None
         sum = 0
@@ -37,7 +48,7 @@ class Helper:
             try:
                 sum += time
             except Exception as e:
-                print e.__str__()
+                print "Error in getting lifetime average: " + e.__str__()
 
         avg = sum/len(times)
         return avg

@@ -1,7 +1,5 @@
-from Helper import Helper
-
 __author__ = 'aleksander'
-
+from Helper import Helper
 import plotly.plotly as py
 from plotly.graph_objs import *
 
@@ -9,15 +7,30 @@ from plotly.graph_objs import *
 class CubeTimePlotter:
 
     helper = None
+    times = None
+    file = None
 
     def __init__(self):
-        CubeTimePlotter.helper = Helper()
+        self.helper = Helper()
+        self.times = self.get_times()
+        self.init()
+
+    def init(self):
+        self.plot()
+        print "Lifetime average: " + self.helper.get_lifetime_avg(self.times).__str__()
+        print "Lifetime best:    " + self.helper.get_lifetime_best(self.times).__str__()
 
     def load_file(self):
-        filepath = "/home/aleksander/Dropbox/Aleks/Cubing/Times/20150216/3x3.csv"
-        with open(filepath) as f:
-            content = f.readlines()
-        return content
+        try:
+            filepath = "/home/aleksander/Dropbox/Aleks/Cubing/Times/20150218/3x3.csv"
+            with open(filepath) as f:
+                content = f.readlines()
+            return content
+        except TypeError as e:
+            print "A TypeError occurred while trying to load file.\nMessage: " + e.message
+        except Exception as e:
+            print "An exception occurred while trying to load file.\nMessage: " + e.message
+
 
     def get_times(self):
         content = self.load_file()
@@ -39,9 +52,9 @@ class CubeTimePlotter:
                     addsec = min * 60
                 times.append(float(seccenti + addsec))
             except ValueError as e:
-                print "ValueError: " + e.message
+                print "ValueError in get_times(): " + e.message
             except Exception as e:
-                print e.__class__ + ": " + e.message
+                print e.__class__ + " in get_times(): " + e.message
 
         #Reverse the list because Speedcube Timer lists them from last to first
         times.reverse()
@@ -63,7 +76,7 @@ class CubeTimePlotter:
             subtable = []
             for j in range(i-4, i+1):
                 subtable.append(times[j])
-            avg = CubeTimePlotter.helper.get_avg(subtable)
+            avg = self.helper.get_avg(subtable)
             averages.append(avg)
 
         x = []
@@ -74,4 +87,3 @@ class CubeTimePlotter:
 
         data = Data([trace1, trace2])
         plot_url = py.plot(data, filename = 'basic-line')
-
