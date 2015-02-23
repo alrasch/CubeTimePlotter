@@ -2,13 +2,12 @@ from reportlab.graphics.samples.scatter import Scatter
 import Helper
 
 __author__ = 'aleksander'
-import plotly.plotly as py
 from plotly.graph_objs import *
 
 
 def load_file():
     try:
-        filepath = "/home/aleksander/Dropbox/Aleks/Cubing/Times/20150218/3x3.csv"
+        filepath = "/home/aleksander/Dropbox/Aleks/Cubing/Times/20150223/3x3.csv"
         with open(filepath) as f:
             content = f.readlines()
         return content
@@ -73,20 +72,19 @@ def plot():
     trace2 = Scatter(x=x, y=averages)
 
     data = Data([trace1, trace2])
-    py.plot(data, filename='basic-line')
+    #py.plot(data, filename='basic-line')
 
 
 class CubeTimePlotter:
 
-    helper = None
-    times = None
-    file = None
-
     def __init__(self):
         self.times = get_times()
-        self.init()
 
     def init(self):
         plot()
-        print "Lifetime average: " + Helper.get_lifetime_avg(self.times).__str__()
-        print "Lifetime best:    " + Helper.get_lifetime_best(self.times).__str__()
+        print "Lifetime average:    " + str(Helper.get_lifetime_avg(self.times))
+        print "Lifetime best:       " + str(Helper.get_lifetime_best(self.times))
+        print "Lifetime best 5:     " + ', '.join(str(i) for i in Helper.get_lifetime_n_best(self.times, 5))
+        print "Average of last 5:   " + str(Helper.get_avg_of_last_n(5, self.times))
+        print "Average of last 10:  " + str(Helper.get_avg_of_last_n(10, self.times))
+        print "Average of last 12:  " + str(Helper.get_avg_of_last_n(12, self.times))

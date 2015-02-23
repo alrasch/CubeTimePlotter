@@ -21,12 +21,12 @@ def get_avg(table):
         try:
             sum += value
         except Exception as e:
-            print "Error in getting average of table: " + e.__str__()
+            print "Error in getting average of table: " + str(e)
     avg = sum/len(table)
     return avg
 
 
-def avg_of_last_n(n, times):
+def get_avg_of_last_n(n, times):
     last_n = times[-1*n:]
 
     sum = 0
@@ -46,7 +46,25 @@ def get_lifetime_avg(times):
         try:
             sum += time
         except Exception as e:
-            print "Error in getting lifetime average: " + e.__str__()
+            print "Error in getting lifetime average: " + e.message
 
     avg = sum/len(times)
     return avg
+
+def get_lowest_from_list(list):
+    lowest = None
+    for value in list:
+        if lowest == None or lowest > value:
+            lowest = value
+    return lowest
+
+
+def get_lifetime_n_best(times, n):
+    if len(times) < 1:
+        return None
+    best = []
+    for i in range(0, n):
+        lowest = get_lowest_from_list(times)
+        best.append(lowest)
+        times.remove(lowest)
+    return best
