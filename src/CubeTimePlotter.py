@@ -2,6 +2,7 @@ from reportlab.graphics.samples.scatter import Scatter
 import Helper
 
 __author__ = 'aleksander'
+import plotly.plotly as py
 from plotly.graph_objs import *
 
 
@@ -72,7 +73,7 @@ def plot():
     trace2 = Scatter(x=x, y=averages)
 
     data = Data([trace1, trace2])
-    #py.plot(data, filename='basic-line')
+    py.plot(data, filename='basic-line')
 
 
 class CubeTimePlotter:
