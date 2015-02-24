@@ -1,57 +1,17 @@
 from reportlab.graphics.samples.scatter import Scatter
+
 import Helper
+import FileHandler
+
 
 __author__ = 'aleksander'
 import plotly.plotly as py
 from plotly.graph_objs import *
 
 
-def load_file():
-    try:
-        filepath = "/home/aleksander/Dropbox/Aleks/Cubing/Times/20150223/3x3.csv"
-        with open(filepath) as f:
-            content = f.readlines()
-        return content
-    except TypeError as e:
-        print "A TypeError occurred while trying to load file.\nMessage: " + e.message
-    except Exception as e:
-        print "An exception occurred while trying to load file.\nMessage: " + e.message
-
-
-def get_times():
-    content = load_file()
-
-    times = []
-
-    for line in content:
-        time = line[22:]
-        min = time[0:2]
-        sec = time[3:5]
-        centi = time[6:8]
-        seccenti = sec + "." + centi
-
-        try:
-            seccenti = float(seccenti)
-            min = float(min)
-            addsec = 0
-            if min > 0:
-                addsec = min * 60
-            times.append(float(seccenti + addsec))
-        except ValueError as e:
-            print "ValueError in get_times(): " + e.message
-        except Exception as e:
-            print "Exception in get_times(): " + e.message
-
-    #Reverse the list because Speedcube Timer lists them from last to first
-    times.reverse()
-
-    return times
-
-
-def plot():
+def plot(times):
 
     #Make a trace for the times
-    times = get_times()
     x = []
     for i in range(1, len(times) + 1):
         x.append(i)
@@ -79,10 +39,10 @@ def plot():
 class CubeTimePlotter:
 
     def __init__(self):
-        self.times = get_times()
+        self.times = FileHandler.get_times()
 
     def init(self):
-        plot()
+        plot(self.times)
         print "Lifetime average:    " + str(Helper.get_lifetime_avg(self.times))
         print "Lifetime best:       " + str(Helper.get_lifetime_best(self.times))
         print "Lifetime best 5:     " + ', '.join(str(i) for i in Helper.get_lifetime_n_best(self.times, 5))
