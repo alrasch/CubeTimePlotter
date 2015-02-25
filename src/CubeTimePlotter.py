@@ -49,3 +49,4 @@ class CubeTimePlotter:
         print "Average of last 5:   " + str(Helper.get_avg_of_last_n(5, self.times))
         print "Average of last 10:  " + str(Helper.get_avg_of_last_n(10, self.times))
         print "Average of last 12:  " + str(Helper.get_avg_of_last_n(12, self.times))
+        print "Average of last 100: " + str(Helper.get_avg_of_last_n(100, self.times))
