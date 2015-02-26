@@ -26,6 +26,16 @@ def get_avg(table):
     return avg
 
 
+def get_avg_of_first_n(n, times):
+    first_n = times[0:n]
+
+    sum = 0
+    for time in first_n:
+        sum += time
+    avg = sum / len(first_n)
+    return avg
+
+
 def get_avg_of_last_n(n, times):
     last_n = times[-1*n:]
 
@@ -36,6 +46,18 @@ def get_avg_of_last_n(n, times):
     avg = sum / len(last_n)
 
     return avg
+
+
+def get_list_of_first_n(n, times):
+    first_n = times[0:n]
+
+    return ', ' . join(str(time) for time in first_n)
+
+
+def get_list_of_last_n(n, times):
+    last_n = times[-1 * n:]
+
+    return ', ' . join(str(time) for time in last_n)
 
 
 def get_lifetime_avg(times):
@@ -50,6 +72,7 @@ def get_lifetime_avg(times):
 
     avg = sum/len(times)
     return avg
+
 
 def get_lowest_from_list(list):
     lowest = None
@@ -68,3 +91,18 @@ def get_lifetime_n_best(times, n):
         best.append(lowest)
         times.remove(lowest)
     return best
+
+
+def get_percentage_improvement_of_first_to_last_n(n, times):
+    avg_of_first_n = get_avg_of_first_n(n, times)
+    avg_of_last_n = get_avg_of_last_n(n, times)
+
+    fractional_change = 1 - (avg_of_last_n / avg_of_first_n)
+
+    percent_change = fractional_change * 100
+
+    return percent_change
+
+
+def get_number_of_solves(times):
+    return len(times)
