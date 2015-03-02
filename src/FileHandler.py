@@ -3,7 +3,7 @@ __author__ = 'aleksander'
 
 def load_file():
     try:
-        filepath = "/home/aleksander/Dropbox/Aleks/Cubing/Times/20150225/3x3.csv"
+        filepath = "/home/aleksander/Dropbox/Aleks/Cubing/Times/20150227/3x3.csv"
         with open(filepath) as f:
             content = f.readlines()
         return content
@@ -32,8 +32,8 @@ def get_times():
             if min > 0:
                 addsec = min * 60
             times.append(float(seccenti + addsec))
-        except ValueError as e:
-            print "ValueError in get_times(): " + e.message
+        except ValueError:
+            continue
         except Exception as e:
             print "Exception in get_times(): " + e.message
 
