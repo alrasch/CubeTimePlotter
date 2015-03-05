@@ -14,7 +14,7 @@ def plot(times):
     x = []
     for i in range(1, len(times) + 1):
         x.append(i)
-    trace1 = Scatter(x=x, y=times)
+    trace1 = Scatter(x=x, y=times, mode='markers')
 
     #Make a trace for the average of last 5
     averages = [0, 0, 0, 0]
@@ -29,7 +29,7 @@ def plot(times):
     for i in range(1, len(averages)+1):
         x.append(i)
 
-    trace2 = Scatter(x=x, y=averages)
+    trace2 = Scatter(x=x, y=averages, mode='markers')
 
     data = Data([trace1, trace2])
     py.plot(data, filename='basic-line')
