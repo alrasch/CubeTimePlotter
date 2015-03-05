@@ -3,7 +3,7 @@ __author__ = 'aleksander'
 
 def load_file():
     try:
-        filepath = "/home/aleksander/Dropbox/Aleks/Cubing/Times/20150227/3x3.csv"
+        filepath = "/home/aleksander/Dropbox/Aleks/Cubing/Times/20150303/3x3.csv"
         with open(filepath) as f:
             content = f.readlines()
         return content

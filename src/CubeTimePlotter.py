@@ -1,7 +1,7 @@
 from reportlab.graphics.samples.scatter import Scatter
 
-import ListHelper
-import FileHandler
+import ListHelper as Lh
+import FileHandler as Fh
 import mathematics.MathHelper as Mh
 import plotly.plotly as py
 import time
@@ -39,17 +39,17 @@ def writeout(times):
 
     print "---"
 
-    print "Number of solves:                " + str(ListHelper.get_number_of_solves(times))
+    print "Number of solves:                " + str(Lh.get_number_of_solves(times))
 
     print "---"
 
-    print "Lifetime average:                " + str(ListHelper.get_lifetime_avg(times))
-    print "Lifetime best:                   " + str(ListHelper.get_lifetime_best(times))
+    print "Lifetime average:                " + str(Lh.get_lifetime_avg(times))
+    print "Lifetime best:                   " + str(Lh.get_lifetime_best(times))
     print "Lifetime best 5:                 " + ', '.join(str(i) for i in Mh.get_lifetime_n_best(times, 5))
 
     print "---"
 
-    print "List of last 5:                  " + str(ListHelper.get_list_of_last_n(5, times))
+    print "List of last 5:                  " + str(Lh.get_list_of_last_n(5, times))
     print "Average of last 5:               " + str(Mh.get_avg_of_last_n(5, times))
 
     print "---"
@@ -60,7 +60,7 @@ def writeout(times):
 
     print "---"
 
-    print "List of first 5:                 " + str(ListHelper.get_list_of_first_n(5, times))
+    print "List of first 5:                 " + str(Lh.get_list_of_first_n(5, times))
     print "Average of first 5:              " + str(Mh.get_avg_of_first_n(5, times))
 
     print "---"
@@ -91,7 +91,7 @@ def writeout(times):
 class CubeTimePlotter:
 
     def __init__(self):
-        self.times = FileHandler.get_times()
+        self.times = Fh.get_times()
 
     def init(self):
         start = time.time()
