@@ -1,10 +1,8 @@
 __author__ = 'aleksander'
 
-
-def load_file():
+def load_file(filename):
     try:
-        filepath = "/home/aleksander/Dropbox/Aleks/Cubing/Times/20150303/3x3.csv"
-        with open(filepath) as f:
+        with open(filename) as f:
             content = f.readlines()
         return content
     except TypeError as e:
@@ -13,8 +11,8 @@ def load_file():
         print "An exception occurred while trying to load file.\nMessage: " + e.message
 
 
-def get_times():
-    content = load_file()
+def get_times(filename):
+    content = load_file(filename)
 
     times = []
 
