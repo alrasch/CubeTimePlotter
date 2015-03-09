@@ -18,13 +18,11 @@ def get_lifetime_best(times):
 
 def get_list_of_first_n(n, times):
     first_n = times[0:n]
-
     return ', ' . join(str(time) for time in first_n)
 
 
 def get_list_of_last_n(n, times):
     last_n = times[-1 * n:]
-
     return ', ' . join(str(time) for time in last_n)
 
 
