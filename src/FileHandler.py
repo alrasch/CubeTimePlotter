@@ -1,5 +1,6 @@
 __author__ = 'aleksander'
 
+
 def load_file(filename):
     try:
         with open(filename) as f:

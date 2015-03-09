@@ -3,24 +3,25 @@ from CubeTimePlotter import CubeTimePlotter
 import sys
 import getopt
 
+
 def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:], "ho:i:", ["no-plot"])
     except getopt.GetoptError as err:
         print str(err)
-        printUsage()
+        printusage()
 
-    inputFile = ""
-    outputFile = ""
+    inputfile = ""
+    outputfile = ""
     plot = True
-    #parse arguemnets from getopt
+    #parse arguments from getopt
     for option, arg in opts:
         if option == "-h":
-            printUsage()
+            printusage()
         elif option == "-i":
-            inputFile = arg
+            inputfile = arg
         elif option == "-o":
-            outputFile = arg
+            outputfile = arg
         elif option == "--no-plot":
             plot = False
 
@@ -31,17 +32,17 @@ def main():
 
     #grab inputFilename if -i not specified
     if len(args) > 0: 
-        inputFile = args[0]
+        inputfile = args[0]
 
-    if len(inputFile) == 0:
-        print "inputFile required"
-        printUsage()
+    if len(inputfile) == 0:
+        print "inputfile required"
+        printusage()
 
-    ctp = CubeTimePlotter(inputFile, outputFile, plot)
+    ctp = CubeTimePlotter(inputfile, outputfile, plot)
     ctp.init()
 
 
-def printUsage():
+def printusage():
     print "main.py [[-i] input file] [-o output file] [-h] [--no-plot]"
     exit(0)
 
