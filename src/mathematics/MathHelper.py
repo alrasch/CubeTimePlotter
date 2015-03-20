@@ -1,6 +1,7 @@
 __author__ = 'aleksander'
 
-import ListHelper
+import ListHelper as Lh
+import copy
 
 
 def get_avg(table):
@@ -16,14 +17,34 @@ def get_avg(table):
     return avg
 
 
+def get_avg_with_elimination(times):
+    best_solve = None
+    worst_solve = None
+
+    times2 = copy.deepcopy(times)
+
+    for i in range(0, len(times2)-1):
+        if best_solve is None or best_solve > times2[i]:
+            best_solve = times2[i]
+        if worst_solve is None or worst_solve < times2[i]:
+            worst_solve = times2[i]
+
+    times2.remove(best_solve)
+    times2.remove(worst_solve)
+
+    avg_of_remaining = get_avg(times2)
+
+    return avg_of_remaining
+
+
 def get_avg_of_first_n(n, times):
     first_n = times[0:n]
-    return get_avg(first_n)
+    return get_avg_with_elimination(first_n)
 
 
 def get_avg_of_last_n(n, times):
     last_n = times[-1*n:]
-    return get_avg(last_n)
+    return get_avg_with_elimination(last_n)
 
 
 def get_lifetime_n_best(times, n):
@@ -31,7 +52,7 @@ def get_lifetime_n_best(times, n):
         return None
     best = []
     for i in range(0, n):
-        lowest = ListHelper.get_lowest_from_list(times)
+        lowest = Lh.get_lowest_from_list(times)
         best.append(lowest)
         times.remove(lowest)
     return best
@@ -54,7 +75,7 @@ def get_best_avg_of_n(n, times):
 
     for i in range(0, len(times)-n+1):
         subtable = times[i:i+n]
-        this_avg = get_avg(subtable)
+        this_avg = get_avg_with_elimination(subtable)
         if this_avg < current_best or current_best is None:
             current_best = this_avg
             best_solves = subtable
