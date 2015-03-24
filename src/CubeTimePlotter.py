@@ -110,5 +110,8 @@ class CubeTimePlotter:
             ', ' . join(str(i) for i in best5[1]) + newline
         out += "Best Ao12 so far:                " + str(Mh.get_best_avg_of_n(12, times)[0]) + newline
         out += "Best Ao100 so far:               " + str(Mh.get_best_avg_of_n(100, times)[0]) + newline
+        out += hr
+
+        out += "You are sub-" + str(Mh.get_current_sub_x(times))
 
         return out

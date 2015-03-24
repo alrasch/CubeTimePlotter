@@ -2,6 +2,7 @@ __author__ = 'aleksander'
 
 import ListHelper as Lh
 import copy
+import math
 
 
 def get_avg(table):
@@ -81,3 +82,10 @@ def get_best_avg_of_n(n, times):
             best_solves = subtable
 
     return [current_best, best_solves]
+
+
+def get_current_sub_x(times):
+    ao100 = get_avg_of_last_n(100, times)
+    rounded_up = int(math.ceil(ao100))
+    subx = rounded_up + 1
+    return subx
