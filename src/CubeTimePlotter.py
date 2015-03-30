@@ -102,6 +102,8 @@ class CubeTimePlotter:
             str("%.2f" % Mh.get_percentage_improvement_of_first_to_last_n(10, times)) + newline
         out += "Percentage change in avg of 12:  " + \
             str("%.2f" % Mh.get_percentage_improvement_of_first_to_last_n(12, times)) + newline
+        out += "Percentage change in avg of 100:  " + \
+            str("%.2f" % Mh.get_percentage_improvement_of_first_to_last_n(100, times)) + newline
         out += hr
 
         best5 = Mh.get_best_avg_of_n(5, times)
